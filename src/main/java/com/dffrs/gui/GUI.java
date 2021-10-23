@@ -67,7 +67,8 @@ public class GUI {
 	private void initialize() {
 		// Main Frame
 		frmTimerapp = new JFrame();
-		frmTimerapp.setIconImage(Toolkit.getDefaultToolkit().getImage("resources/TimerApp Icon.png"));
+		//frmTimerapp.setIconImage(Toolkit.getDefaultToolkit().getImage("resources/TimerApp Icon.png"));
+		frmTimerapp.setIconImage(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("play-button.png")).getImage()).getImage());
 		frmTimerapp.setBackground(new Color(192, 192, 192));
 		frmTimerapp.setTitle("TimerApp");
 		frmTimerapp.setBounds(100, 100, 401, 177);
@@ -115,7 +116,8 @@ public class GUI {
 			}
 		});
 		panelStart.setLayout(new BorderLayout(0, 0));
-		btnStart.setIcon(new ImageIcon("resources/play-button.png"));
+		//btnStart.setIcon(new ImageIcon("resources/play-button.png"));
+		btnStart.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("play-button.png")).getImage()));
 		btnStart.setHorizontalAlignment(SwingConstants.CENTER);
 		btnStart.setEnabled(false);
 		panelStart.add(btnStart);
@@ -135,7 +137,8 @@ public class GUI {
 			}
 		});
 		panelPause.setLayout(new BorderLayout(0, 0));
-		btnPause.setIcon(new ImageIcon("resources/pause.png"));
+		//btnPause.setIcon(new ImageIcon("resources/pause.png"));
+		btnPause.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("pause.png")).getImage()));
 		btnPause.setHorizontalAlignment(SwingConstants.CENTER);
 		btnPause.setEnabled(false);
 		panelPause.add(btnPause);
@@ -144,7 +147,8 @@ public class GUI {
 		buttonMainPanel.add(panelContinueStop, "panelContinueStop");
 		JLabel btnStop = new JLabel("");
 		btnStop.setHorizontalAlignment(SwingConstants.CENTER);
-		btnStop.setIcon(new ImageIcon("resources/stop.png"));
+		//btnStop.setIcon(new ImageIcon("resources/stop.png"));
+		btnStop.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("stop.png")).getImage()));
 		btnStop.setEnabled(false);
 		btnStop.addMouseListener(new MouseAdapter() {
 			@Override
@@ -160,7 +164,8 @@ public class GUI {
 		panelContinueStop.add(btnStop);
 		JLabel btnContinue = new JLabel("");
 		btnContinue.setHorizontalAlignment(SwingConstants.CENTER);
-		btnContinue.setIcon(new ImageIcon("resources/play-button.png"));
+		//btnContinue.setIcon(new ImageIcon("resources/play-button.png"));
+		btnContinue.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("play-button.png")).getImage()));
 		btnContinue.setEnabled(false);
 		btnContinue.addMouseListener(new MouseAdapter() {
 			@Override
@@ -205,7 +210,8 @@ public class GUI {
 		buttonSavePanel.add(yesOrNoPanel, "yesOrNoPanel");
 		
 		JLabel buttonYes = new JLabel("");
-		buttonYes.setIcon(new ImageIcon("resources/checked.png"));
+		//buttonYes.setIcon(new ImageIcon("resources/checked.png"));
+		buttonYes.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("checked.png")).getImage()));
 		buttonYes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -226,7 +232,8 @@ public class GUI {
 				System.exit(0);
 			}
 		});
-		buttonNo.setIcon(new ImageIcon("resources/cancel.png"));
+		//buttonNo.setIcon(new ImageIcon("resources/cancel.png"));
+		buttonNo.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("cancel.png")).getImage()));
 		buttonNo.setEnabled(false);
 		buttonNo.setHorizontalAlignment(SwingConstants.CENTER);
 		yesOrNoPanel.add(buttonNo);
@@ -272,7 +279,8 @@ public class GUI {
 				}
 			}
 		});
-		buttonSave.setIcon(new ImageIcon("resources/down-arrow.png"));
+		//buttonSave.setIcon(new ImageIcon("resources/down-arrow.png"));
+		buttonSave.setIcon(new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("down-arrow.png")).getImage()));
 		buttonSave.setEnabled(false);
 		buttonSave.setHorizontalAlignment(SwingConstants.CENTER);
 		OkPanel.add(buttonSave);	
