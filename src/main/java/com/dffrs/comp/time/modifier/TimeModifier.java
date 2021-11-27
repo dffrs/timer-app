@@ -14,8 +14,8 @@ public class TimeModifier extends Thread {
 
     private static final long MAX_TIME_SPENT_SLEEPING = 1000;
     private static final int MAX_TIME_ADDED = 1;
-    private Time time;
-    private JLabel label;
+    private final Time time;
+    private final JLabel label;
     // First solution
     private boolean isPaused;
 
