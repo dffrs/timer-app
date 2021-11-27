@@ -1,5 +1,7 @@
 package com.dffrs.comp.time;
 
+import java.util.Objects;
+
 /**
  * Class to represent the time show in the GUI. It's stored as seconds,
  * but easily manipulated and converted to any popular format.
@@ -39,6 +41,19 @@ public final class Time {
 
     public synchronized void incrementTime(int amount) {
         this.seconds += amount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Time time = (Time) o;
+        return seconds == time.seconds;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(seconds);
     }
 
     @Override
