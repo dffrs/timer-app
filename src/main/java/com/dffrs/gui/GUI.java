@@ -1,31 +1,17 @@
 package com.dffrs.gui;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
-
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-
 import com.dffrs.comp.time.Time;
 import com.dffrs.comp.time.modifier.TimeModifier;
 import com.dffrs.util.writer.JSONWriter;
 
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.awt.CardLayout;
-import javax.swing.JTextField;
-import javax.swing.ImageIcon;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.Color;
 
 /**
  * TimerApp' GUI.
@@ -67,9 +53,9 @@ public class GUI {
         // Main Frame
         frmTimerApp = new JFrame();
         frmTimerApp.setIconImage(new ImageIcon(
-            new ImageIcon(
-                getClass().getClassLoader().getResource("play-button.png"))
-                .getImage()
+                new ImageIcon(
+                    getClass().getClassLoader().getResource("imgs/play-button.png"))
+                    .getImage()
             ).getImage()
         );
         frmTimerApp.setBackground(new Color(192, 192, 192));
@@ -121,7 +107,7 @@ public class GUI {
         panelStart.setLayout(new BorderLayout(0, 0));
         btnStart.setIcon(new ImageIcon(
             new ImageIcon(
-                getClass().getClassLoader().getResource("play-button.png")
+                getClass().getClassLoader().getResource("imgs/play-button.png")
             ).getImage()
         ));
         btnStart.setHorizontalAlignment(SwingConstants.CENTER);
@@ -145,7 +131,7 @@ public class GUI {
         panelPause.setLayout(new BorderLayout(0, 0));
         btnPause.setIcon(new ImageIcon(
             new ImageIcon(
-                getClass().getClassLoader().getResource("pause.png")
+                getClass().getClassLoader().getResource("imgs/pause.png")
             ).getImage()
         ));
         btnPause.setHorizontalAlignment(SwingConstants.CENTER);
@@ -158,7 +144,7 @@ public class GUI {
         btnStop.setHorizontalAlignment(SwingConstants.CENTER);
         btnStop.setIcon(new ImageIcon(
             new ImageIcon(
-                getClass().getClassLoader().getResource("stop.png")
+                getClass().getClassLoader().getResource("imgs/stop.png")
             ).getImage()
         ));
         btnStop.setEnabled(false);
@@ -178,7 +164,7 @@ public class GUI {
         btnContinue.setHorizontalAlignment(SwingConstants.CENTER);
         btnContinue.setIcon(new ImageIcon(
             new ImageIcon(
-                getClass().getClassLoader().getResource("play-button.png")
+                getClass().getClassLoader().getResource("imgs/play-button.png")
             ).getImage()
         ));
         btnContinue.setEnabled(false);
@@ -227,7 +213,7 @@ public class GUI {
         JLabel buttonYes = new JLabel("");
         buttonYes.setIcon(new ImageIcon(
             new ImageIcon(
-                getClass().getClassLoader().getResource("checked.png")
+                getClass().getClassLoader().getResource("imgs/checked.png")
             ).getImage()
         ));
         buttonYes.addMouseListener(new MouseAdapter() {
@@ -252,7 +238,7 @@ public class GUI {
         });
         buttonNo.setIcon(new ImageIcon(
             new ImageIcon(
-                getClass().getClassLoader().getResource("cancel.png")
+                getClass().getClassLoader().getResource("imgs/cancel.png")
             ).getImage()
         ));
         buttonNo.setEnabled(false);
@@ -302,7 +288,7 @@ public class GUI {
         });
         buttonSave.setIcon(new ImageIcon(
             new ImageIcon(
-                getClass().getClassLoader().getResource("down-arrow.png")
+                getClass().getClassLoader().getResource("imgs/down-arrow.png")
             ).getImage()
         ));
         buttonSave.setEnabled(false);
