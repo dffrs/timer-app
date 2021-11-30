@@ -25,16 +25,33 @@ public final class DBConnector {
     }
 
 
-    private static Connection establishConnection() throws SQLException {
+    private static Connection establishConnection() throws SQLException, IllegalArgumentException {
         Connection conn;
 
         String url = prop.getProperty("url");
         String user = prop.getProperty("user");
         String pass = prop.getProperty("password");
 
+        if (url.isEmpty() || user.isEmpty() || pass.isEmpty()) {
+            // If this exception is thrown, it means their values are empty.
+            throw new IllegalArgumentException();
+        }
+
         conn = DriverManager.getConnection(url, user, pass);
 
+        System.out.println("Establishing connection to DB as "+ user +".\n ");
         return conn;
+    }
+
+    private static void closeConnectionToDB(Connection conn) {
+        try {
+            if (conn != null) {
+                conn.close();
+                System.out.println("Connection to DB closed.\n");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void saveTimeToDB(String name, String desc, Time time) {
@@ -57,15 +74,12 @@ public final class DBConnector {
 
             stmt.executeQuery();
 
-        } catch (SQLException e) {
+        } catch (SQLException | IllegalArgumentException e) {
+            if (e instanceof IllegalArgumentException)
+                System.err.println("ERROR: Values with empty parameters. Check db.properties file.\n");
             e.printStackTrace();
         } finally {
-            try {
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            closeConnectionToDB(conn);
         }
     }
 }
