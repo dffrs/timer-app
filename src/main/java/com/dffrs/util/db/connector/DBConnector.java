@@ -3,17 +3,16 @@ package com.dffrs.util.db.connector;
 import com.dffrs.comp.time.Time;
 
 import java.io.IOException;
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.Properties;
+import java.sql.*;
+import java.util.*;
 
 public final class DBConnector {
 
     private static final Properties prop;
+    private static final String USER_OS;
 
     static {
+        USER_OS = System.getProperty("user.name");
         prop = new Properties();
         try {
             prop.load(DBConnector.class.getResourceAsStream(("/db/properties/db.properties")));
@@ -39,7 +38,7 @@ public final class DBConnector {
 
         conn = DriverManager.getConnection(url, user, pass);
 
-        System.out.println("Establishing connection to DB as "+ user +".\n ");
+        System.out.println("Establishing connection to DB as " + user + ".\n ");
         return conn;
     }
 
@@ -61,7 +60,7 @@ public final class DBConnector {
 
             conn = establishConnection();
 
-            String user = System.getProperty("user.name");
+
             java.sql.Time timeSQL = java.sql.Time.valueOf(time.toString());
 
             String query = "{CALL SaveTime(?, ?, ?, ?)}";
@@ -69,7 +68,7 @@ public final class DBConnector {
 
             stmt.setString(1, name);
             stmt.setString(2, desc);
-            stmt.setString(3, user);
+            stmt.setString(3, USER_OS);
             stmt.setTime(4, timeSQL);
 
             stmt.executeQuery();
@@ -81,5 +80,48 @@ public final class DBConnector {
         } finally {
             closeConnectionToDB(conn);
         }
+    }
+
+    public static Map<String, List<String>> getUserProjects() {
+        Map<String, List<String>> mapOfSavedProjects = new HashMap<>();
+
+        String usernameTableColumn = "user_name";
+        String projectNameTableColumn = "project_name";
+        String startingTimeTableColumn = "starting_time";
+        String timeSpentTableColumn = "time_spent";
+
+        List<String> columnNames = List.of(usernameTableColumn,
+            projectNameTableColumn,
+            startingTimeTableColumn,
+            timeSpentTableColumn);
+
+        Connection conn = null;
+
+        try {
+            conn = establishConnection();
+
+            String query = "{CALL GetUserTimeSpentPerProject(?)}";
+            CallableStatement stmt = conn.prepareCall(query);
+
+            stmt.setString(1, USER_OS);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                for (String columnName : columnNames) {
+                    String temp = rs.getString(columnName);
+                    mapOfSavedProjects.computeIfAbsent(columnName, k -> new ArrayList<>());
+
+                    mapOfSavedProjects.get(columnName).add(temp);
+
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnectionToDB(conn);
+        }
+
+        return mapOfSavedProjects;
     }
 }
