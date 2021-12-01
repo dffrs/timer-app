@@ -85,15 +85,7 @@ public final class DBConnector {
     public static Map<String, List<String>> getUserProjects() {
         Map<String, List<String>> mapOfSavedProjects = new HashMap<>();
 
-        String usernameTableColumn = "user_name";
-        String projectNameTableColumn = "project_name";
-        String startingTimeTableColumn = "starting_time";
-        String timeSpentTableColumn = "time_spent";
-
-        List<String> columnNames = List.of(usernameTableColumn,
-            projectNameTableColumn,
-            startingTimeTableColumn,
-            timeSpentTableColumn);
+        List<String> columnNamesList = List.of("user_name", "project_name", "starting_time", "time_spent");
 
         Connection conn = null;
 
@@ -107,12 +99,9 @@ public final class DBConnector {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                for (String columnName : columnNames) {
-                    String temp = rs.getString(columnName);
+                for (String columnName : columnNamesList) {
                     mapOfSavedProjects.computeIfAbsent(columnName, k -> new ArrayList<>());
-
-                    mapOfSavedProjects.get(columnName).add(temp);
-
+                    mapOfSavedProjects.get(columnName).add(rs.getString(columnName));
                 }
             }
 
