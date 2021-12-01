@@ -43,7 +43,7 @@ public final class DBConnector {
      * {@link #closeConnectionToDB(Connection)} at the end.
      *
      * @return Connection instance, if the connection was established normally. NULL otherwise.
-     * @throws SQLException Everytime a SQLException occurs.
+     * @throws SQLException             Everytime a SQLException occurs.
      * @throws IllegalArgumentException Everytime there is problem reading db.properties parameters.
      */
     private static Connection establishConnection() throws SQLException, IllegalArgumentException {
@@ -66,6 +66,7 @@ public final class DBConnector {
 
     /**
      * Private method to close a previously established connection to the database.
+     *
      * @param conn Connection instance to close the connection.
      */
     private static void closeConnectionToDB(Connection conn) {
