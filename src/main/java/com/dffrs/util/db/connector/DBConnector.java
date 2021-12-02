@@ -130,7 +130,13 @@ public final class DBConnector {
         Map<String, List<String>> mapOfSavedProjects = new HashMap<>();
 
         //DB Table's names.
-        List<String> columnNamesList = List.of("user_name", "project_name", "starting_time", "time_spent");
+        List<String> columnNamesList = List.of(
+                                                    "user_name",
+                                                    "project_name",
+                                                    "project_description",
+                                                    "starting_time",
+                                                    "time_spent"
+                                                );
 
         Connection conn = null;
 

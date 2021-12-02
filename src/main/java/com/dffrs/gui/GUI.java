@@ -23,6 +23,8 @@ public class GUI {
 
     private JFrame frmTimerApp;
     private JTextField queryTextField;
+    private JTextField textField;
+    private String projectName;
 
     /**
      * Launch the application.
@@ -275,18 +277,9 @@ public class GUI {
         buttonSave.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                String userInput = queryTextField.getText();
-                if (!userInput.isEmpty()) {
-//                    Map<String, List<String>> map = new HashMap<String, List<String>>();
-//                    map.put(new Date().toString(), List.of(thread.getTime().toString()));
-//
-//                    JSONWriter.createJSONFile(userInput, map);
-
-                    //ADDED
-                    DBConnector.saveTimeToDB(userInput, "", thread.getTime());
-
-                    // Close program
-                    System.exit(0);
+                projectName= queryTextField.getText();
+                if (!projectName.isEmpty()) {
+                    changePanel(savePanel, "descriptionSavePanel");
                 }
             }
         });
@@ -298,6 +291,50 @@ public class GUI {
         buttonSave.setEnabled(false);
         buttonSave.setHorizontalAlignment(SwingConstants.CENTER);
         OkPanel.add(buttonSave);
+
+        JPanel descriptionSavePanel = new JPanel();
+        savePanel.add(descriptionSavePanel, "descriptionSavePanel");
+        descriptionSavePanel.setLayout(new GridLayout(0, 1, 0, 0));
+
+        JPanel descriptionAsPanel = new JPanel();
+        descriptionAsPanel.setLayout(null);
+        descriptionSavePanel.add(descriptionAsPanel);
+
+        textField = new JTextField();
+        textField.setToolTipText("Small Description");
+        textField.setHorizontalAlignment(SwingConstants.LEFT);
+        textField.setFont(new Font("Dialog", Font.PLAIN, 22));
+        textField.setColumns(10);
+        textField.setBounds(12, 12, 377, 52);
+        descriptionAsPanel.add(textField);
+
+        JPanel OkPanelForDescription = new JPanel();
+        descriptionSavePanel.add(OkPanelForDescription);
+        OkPanelForDescription.setLayout(new BorderLayout(0, 0));
+
+        JLabel buttonSave_1 = new JLabel("");
+        buttonSave_1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                String userInput = textField.getText();
+                if (!userInput.isEmpty()) {
+                    //ADDED
+                    DBConnector.saveTimeToDB(projectName, userInput, thread.getTime());
+                    //JSONWriter.createJSONFile(projectName, DBConnector.getUserProjects());
+
+                    // Close program
+                    System.exit(0);
+                }
+            }
+        });
+        buttonSave_1.setIcon(new ImageIcon(
+            new ImageIcon(
+                getClass().getClassLoader().getResource("imgs/down-arrow.png")
+            ).getImage()
+        ));
+        buttonSave_1.setEnabled(false);
+        buttonSave_1.setHorizontalAlignment(SwingConstants.CENTER);
+        OkPanelForDescription.add(buttonSave_1);
     }
 
     /***
