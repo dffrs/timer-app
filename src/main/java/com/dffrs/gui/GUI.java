@@ -2,6 +2,7 @@ package com.dffrs.gui;
 
 import com.dffrs.comp.time.Time;
 import com.dffrs.comp.time.modifier.TimeModifier;
+import com.dffrs.util.db.connector.DBConnector;
 import com.dffrs.util.writer.JSONWriter;
 
 import javax.swing.*;
@@ -276,10 +277,13 @@ public class GUI {
             public void mouseClicked(MouseEvent e) {
                 String userInput = queryTextField.getText();
                 if (!userInput.isEmpty()) {
-                    Map<String, List<String>> map = new HashMap<String, List<String>>();
-                    map.put(new Date().toString(), List.of(thread.getTime().toString()));
+//                    Map<String, List<String>> map = new HashMap<String, List<String>>();
+//                    map.put(new Date().toString(), List.of(thread.getTime().toString()));
+//
+//                    JSONWriter.createJSONFile(userInput, map);
 
-                    JSONWriter.createJSONFile(userInput, map);
+                    //ADDED
+                    DBConnector.saveTimeToDB(userInput, "", thread.getTime());
 
                     // Close program
                     System.exit(0);
